@@ -2,10 +2,17 @@ print("Sourcing Packages")
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
+    require'nvim-treesitter.configs'.setup {
+      ensure_installed = "all",  -- Certifique-se de instalar todas as linguagens
+      highlight = {
+        enable = true,  -- Ativar realce de sintaxe
+      },
+    }
+
     use 'python-mode/python-mode'
     use 'wbthomason/packer.nvim'
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim', tag = '0.1.5',
             -- or                              , branch = '0.1.x',
             requires = { {'nvim-lua/plenary.nvim'} }
     }
@@ -25,6 +32,7 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'junegunn/fzf'
     use 'junegunn/fzf.vim'
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'

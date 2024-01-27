@@ -1,2 +1,0 @@
-# .cofing
-my .config/ files

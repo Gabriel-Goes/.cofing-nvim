@@ -7,8 +7,7 @@ function ColorMyPencils(color)
 
 end
 
-ColorMyPencils()
-
+--ColorMyPencils()
 
 vim.g.tokyonight_transparent_sidebar = true
 vim.g.tokyonight_transparent = true
