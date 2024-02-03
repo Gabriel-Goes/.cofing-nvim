@@ -11,8 +11,7 @@ local function bind(op, outer_opts)
     end
 end
 
-M.nmap = bind("n", {noremap = false})
-
+M.Mnmap = bind("n", {noremap = false})
 M.nnoremap = bind("n")
 M.vnoremap = bind("v")
 M.xnoremap = bind("x")

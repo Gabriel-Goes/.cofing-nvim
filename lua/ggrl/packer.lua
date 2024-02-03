@@ -1,4 +1,5 @@
 print("Sourcing Packages")
+vim.cmd [[]]
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
@@ -38,6 +39,9 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/nvim-cmp'
     use 'BurntSushi/ripgrep'
+     -- Neotest
+    use ('nvim-neotest/neotest')
+    use ('nvim-neotest/neotest-python')
     use 'sharkdp/fd'
     use {
     'VonHeikemen/lsp-zero.nvim',

@@ -10,6 +10,10 @@ end)
 
 require('telescope').setup{
     extensions = {
+        live_grep = {
+            prompt = 'Live Grep > ',
+            input = '',
+        },
         fzf = {
             fuzzy = true,                    -- false will only do exact matching
             override_generic_sorter = true,  -- override the generic sorter
@@ -19,4 +23,3 @@ require('telescope').setup{
     }
 }
 require('telescope').load_extension('fzf')
---require('live-grep').setup{}

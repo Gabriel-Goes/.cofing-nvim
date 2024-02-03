@@ -20,12 +20,49 @@ vim.g.mapleader = " "
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 12
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
-
-vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = "80"
 
 vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamed'
+vim.opt.guifont = 'SauceCodePro:h8'
+
+vim.opt.updatetime = 250
+
+-- Configurações do LSP
+-- Customizing how diagnostics are displayed
+vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+    callback = function()
+        vim.diagnostic.open_float(nil, {
+            focusable = false,
+            close_events = {"BufLeave", "CursorMoved", "InsertEnter", "FocusLost"},
+            border = 'single',
+            source = 'always',
+            prefix = ' ',
+            scope = 'cursor',
+        })
+    end,
+})
+
+vim.diagnostic.config({
+    -- enable buffer diagnostics hover mouse
+    float = {
+        source = "true",
+        preview = true,
+        scope = "buffer",
+    },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true
+})
+
+-- Aumentar o espaço da primeira coluna antes dos linenumbers
+vim.opt.numberwidth = 1
+-- Aumentar o tamanho da primeira coluna.
+vim.opt.foldcolumn = "1"
+-- Aumentar o espaço disponível por caractere no signicons
+vim.opt.signcolumn = "yes:1"
