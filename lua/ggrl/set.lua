@@ -10,6 +10,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
@@ -28,17 +29,20 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.clipboard = 'unnamedplus'
 -- vim.opt.clipboard = 'unnamed'
-vim.opt.guifont = 'SauceCodePro:h8'
 
 vim.opt.updatetime = 250
 
 -- Configurações do LSP
 -- Customizing how diagnostics are displayed
-vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
-    callback = function()
+vim.api.nvim_create_autocmd({"CursorHold",
+                             "CursorHoldI"},
+    {callback = function()
         vim.diagnostic.open_float(nil, {
             focusable = false,
-            close_events = {"BufLeave", "CursorMoved", "InsertEnter", "FocusLost"},
+            close_events = {"BufLeave",
+                            "CursorMoved",
+                            "InsertEnter",
+                            "FocusLost"},
             border = 'single',
             source = 'always',
             prefix = ' ',
@@ -66,3 +70,8 @@ vim.opt.numberwidth = 1
 vim.opt.foldcolumn = "1"
 -- Aumentar o espaço disponível por caractere no signicons
 vim.opt.signcolumn = "yes:1"
+--
+vim.opt.showmode = true
+vim.opt.showcmd = true
+
+vim.opt.guifont = "SourceCodePro:h12"
