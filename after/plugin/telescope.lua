@@ -10,7 +10,7 @@ end)
 vim.keymap.set("n", "<leader>po", function()
     builtin.live_grep({ search = vim.fn.input("Live Grep > ")});
 end)
-vim.keymap.set("n", "<leader>gs", function()
+vim.keymap.set("n", "<leader>gf", function()
     builtin.grep_string({ search = vim.fn.expand("<cword>") });
 end)
 
@@ -29,5 +29,3 @@ require('telescope').setup{
     }
 }
 require('telescope').load_extension('fzf')
-
-

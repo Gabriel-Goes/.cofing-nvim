@@ -1,5 +1,8 @@
+-- Autor: Gabriel Góes Rocha de Lima
+-- after/plugin/cmp.lua
+-- Last Change: 2024-02-05 00:48
+-- Configurações do cmp
 local cmp = require('cmp')
-
 cmp.setup({
     snippet = {
         -- REQUIRED - you must specify a snippet engine
@@ -16,7 +19,7 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -26,7 +29,6 @@ cmp.setup({
         { name = 'cmdline' },
     })
 })
-
 -- Set configuration for spcific filetypes
 cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
@@ -35,7 +37,6 @@ cmp.setup.filetype('gitcommit', {
         { name = 'buffer' },
     })
 })
-
 -- Use buffer for '/' and '?' (if you enabled 'native_menu', this wont work)
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
@@ -43,7 +44,6 @@ cmp.setup.cmdline({ '/', '?' }, {
         { name = 'buffer' }
     }
 })
-
 -- use cmdline & path source for ':' (if you enabled 'native_menu', this wont work)
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
@@ -53,12 +53,12 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' },
     })
 })
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <pylsp> with each lsp server you've enabled.
-require('lspconfig')['pylsp'].setup {
+require('lspconfig').pylsp.setup {
     capabilities = capabilities
 }
-require('lspconfig')['lua_ls'].setup {
+require('lspconfig').lua_ls.setup {
     capabilities = capabilities
 }
+print("after/plugin/cmp.lua carregado com sucesso!")

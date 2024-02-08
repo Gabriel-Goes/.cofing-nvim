@@ -1,10 +1,10 @@
 require'soil'.setup{
     -- If you want to use Plant UML jar version instead of the install version
-    puml_jar = "/home/ggrl/softwares/p/plantuml.jar",
+    puml_jar = "/home/ggrl/softwares/plantuml-1.2024.0.jar",
 
     -- If you want to customize the image showed when running this plugin
     image = {
-        darkmode = false, -- Enable or disable darkmode 
+        darkmode = true, -- Enable or disable darkmode 
         format = "png", -- Choose between png or svg
 
         -- This is a default implementation of using nsxiv to open the resultant image

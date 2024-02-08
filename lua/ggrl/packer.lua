@@ -70,11 +70,17 @@ return require('packer').startup(function(use)
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
     use 'edkolev/tmuxline.vim'
-    -- use tokyonight collor scheme
+
+    -- Colors
     use 'folke/tokyonight.nvim'
-    -- use gruvbox collor scheme
     use 'morhetz/gruvbox'
+
+    -- UML plugin
     use 'javiorfo/nvim-soil'
     use 'javiorfo/nvim-nyctophilia'
+    use 'aklt/plantuml-syntax'
+
+    -- Open in browser
+    use 'tyru/open-browser.vim'
 end)
 
