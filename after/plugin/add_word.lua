@@ -11,3 +11,4 @@ end
 
 local addWord = AddWordToDictionary
 vim.keymap.set("n", "<leader>aw", addWord, { noremap = true, silent = true })
+print('after/plugin/add_word.lua carregado com sucesso!')

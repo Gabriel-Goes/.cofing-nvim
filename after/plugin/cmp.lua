@@ -61,4 +61,4 @@ require('lspconfig').pylsp.setup {
 require('lspconfig').lua_ls.setup {
     capabilities = capabilities
 }
-print("after/plugin/cmp.lua carregado com sucesso!")
+print("CMP carregado com sucesso!")

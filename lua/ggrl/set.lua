@@ -24,6 +24,14 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.updatetime = 250
 vim.g.mapleader = " "
 vim.g.pymode_lint_signs = 0
+-- Aumentar o espaço da primeira coluna antes dos linenumbers
+vim.opt.numberwidth = 1
+-- Aumentar o tamanho da primeira coluna.
+vim.opt.foldcolumn = "1"
+-- Aumentar o espaço disponível por caractere no signicons
+vim.opt.signcolumn = "yes:1"
+vim.opt.showcmd = true
+vim.opt.cmdheight = 1
 -- Configurações VIMdiagnostic
 vim.api.nvim_create_autocmd({"CursorHold",
                              "CursorHoldI"},
@@ -53,11 +61,4 @@ vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = true
 })
--- Aumentar o espaço da primeira coluna antes dos linenumbers
-vim.opt.numberwidth = 1
--- Aumentar o tamanho da primeira coluna.
-vim.opt.foldcolumn = "1"
--- Aumentar o espaço disponível por caractere no signicons
-vim.opt.signcolumn = "yes:1"
-vim.opt.showcmd = true
 print("lua/ggrl/set.lua carregado com sucesso!")

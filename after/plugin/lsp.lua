@@ -80,4 +80,4 @@ for type, icon in pairs(signs) do
                            texthl = hl,
                            numhl = "" })
 end
-print("after/plugin/lsp.lua Carregado com sucesso")
+print("LSP Carregado com sucesso")
