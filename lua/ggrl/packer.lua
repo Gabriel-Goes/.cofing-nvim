@@ -9,7 +9,6 @@ return require('packer').startup(function(use)
         enable = true,  -- Ativar realce de sintaxe
       },
     }
-
     use 'python-mode/python-mode'
     use 'wbthomason/packer.nvim'
     use {'nvim-telescope/telescope.nvim', tag = '0.1.5',

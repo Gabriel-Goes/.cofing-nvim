@@ -46,7 +46,7 @@ require'lspconfig'.pylsp.setup{
     }
 }
 require'lspconfig'.ltex.setup{
-    filetypes = {"tex", "bib", "markdown"},
+    filetypes = {"tex", "bib"},
     settings = {
         ltex = {
             language = "pt-BR",
@@ -67,8 +67,48 @@ require'lspconfig'.grammarly.setup{
 }
 require'lspconfig'.marksman.setup{
     filetypes = {'markdown'},
-    autostart = false,
+    settings = {
+        marksman = {
+            language = "pt-BR",
+            dictionary = {
+                ["pt-BR"] = vim.fn.readfile(vim.fn.expand("/home/ggrl/.config/nvim/dictionary/pt-BR.dic")),
+            },
+            enabled = true,
+        }
+    },
 }
+-- Configurações VIMdiagnostic
+vim.api.nvim_create_autocmd({"CursorHold"}, {
+    callback = function()
+        if vim.api.nvim_get_mode().mode == "n" then
+            vim.diagnostic.open_float(nil, {
+                focusable = false,
+                close_events = {"BufLeave",
+                                "CursorMoved",
+                                "InsertEnter",
+                                "FocusLost"},
+                border = 'single',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            })
+        end
+
+    end,
+})
+vim.diagnostic.config({
+    -- enable buffer diagnostics hover mouse
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+        source = "true",
+        preview = true,
+        scope = "buffer",
+    }
+})
 -- Change diagnostic symbols in the sign column (gutter)
 local signs = { Error = "󰅚",
                 Warn = "󰀪",

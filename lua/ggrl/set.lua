@@ -32,33 +32,4 @@ vim.opt.foldcolumn = "1"
 vim.opt.signcolumn = "yes:1"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
--- Configurações VIMdiagnostic
-vim.api.nvim_create_autocmd({"CursorHold",
-                             "CursorHoldI"},
-    {callback = function()
-        vim.diagnostic.open_float(nil, {
-            focusable = false,
-            close_events = {"BufLeave",
-                            "CursorMoved",
-                            "InsertEnter",
-                            "FocusLost"},
-            border = 'single',
-            source = 'always',
-            prefix = ' ',
-            scope = 'cursor',
-        })
-    end,
-})
-vim.diagnostic.config({
-    -- enable buffer diagnostics hover mouse
-    float = {
-        source = "true",
-        preview = true,
-        scope = "buffer",
-    },
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true
-})
 print("lua/ggrl/set.lua carregado com sucesso!")

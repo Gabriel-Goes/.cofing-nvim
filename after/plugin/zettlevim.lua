@@ -27,6 +27,30 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 local function capitalizeFirstLetter(str)
     return (str:gsub("^.", string.upper))
 end
+-------------------------------------------------------------------------------
+
+---------------------- ZettleVimCreateBiderecionalLink-------------------------
+-- Função para criar um link bidirecional entre dois arquivos
+function ZettleVimCreateBiderecionalLink(word)
+    -- Verifica se no arquivo atual possui um link para a palavra no formato "#palavra"
+    local currentFileContent = vim.fn.readfile(vim.fn.expand("%:p"))
+    local wordExists = false
+    -- Verifica se a palavra já existe no arquivo
+    for _, line in ipairs(currentFileContent) do
+        if line:find("#" .. word) then
+            print("Link para " .. word .. " já existe")
+            wordExists = true
+            break
+        end
+    end
+    -- Se não houver, adiciona a palavra no topo do arquivo atual como um link
+    if not wordExists then
+        table.insert(currentFileContent, 4, "#" .. word)
+        -- Grava o conteúdo atualizado no arquivo
+        vim.fn.writefile(currentFileContent, vim.fn.expand("%:p"))
+        print("Link para #" .. word .. " adicionado")
+    end
+end
 -------------------- ZettleVimCreateorFind(word) ------------------------------
 function ZettleVimCreateorFind(word)
     -- Verifica se a palavra é vazia
@@ -34,21 +58,26 @@ function ZettleVimCreateorFind(word)
         print("Sem palavras, tsc tsc tsc ...")
         return
     end
-
     local filepath = tempestade_path .. word
     local tempCerebralPath = tempestade_path .. "tempestade cerebral"
-
     -- Verifica se o arquivo existe. Se não, cria o arquivo
     if vim.fn.filereadable(filepath) == 0 then
         local titulo = "# " .. capitalizeFirstLetter(word)
-        -- Cria o arquivo com título e pula linha
-        vim.fn.writefile({titulo, ''}, filepath)
-
+        local link_line_head = "---- links ---------------------------------------------------------------------"
+        local link_line_tail = "--------------------------------------------------------------------------------"
+        local arquivoCriador = vim.fn.expand("%:t:r")
+        -- Cria o arquivo com título e pula linha, adiciona o link_line_head e link_line_tail
+        vim.fn.writefile({titulo, '', link_line_head, '#' .. arquivoCriador, link_line_tail, ''}, filepath)
         -- Adiciona a palavra ao arquivo "tempestade cerebral" como um indice
         local tempCerebralContent  = vim.fn.readfile(tempCerebralPath)
-        table.insert(tempCerebralContent,"    - " ..  word)
+        table.insert(tempCerebralContent,"    - #" ..  word)
         vim.fn.writefile(tempCerebralContent, tempCerebralPath)
         print(word .. " adicionado ao arquivo tempestade cerebral")
+        -- Cria um link bidirecional no arquivo atual apara a palavra
+        ZettleVimCreateBiderecionalLink(word)
+    -- Se a palavra já existe, checa se o arquivo atual já possui um link para a palavra
+    else
+        ZettleVimCreateBiderecionalLink(word)
     end
         -- abre o arquivo existente
         vim.cmd('edit ' .. filepath)
@@ -56,7 +85,7 @@ end
 -------------------------------------------------------------------------------
 -- CreatorFind Visual Mode
 vim.keymap.set("v", "gF", function()
-    -- Yank a seleção do buffer no visual mode, e apenas a seleção ao registro 'a' 
+    -- Yank a seleção do buffer no visual mode, e apenas a seleção ao registro 'a'
     vim.cmd("normal! \"ay")
     -- Imediatamente após o yan, obtém a seleção do registro 'a' e armazena na variável selection
     local selection = vim.fn.getreg("a")

@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -123,6 +128,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/fzf.vim",
     url = "https://github.com/junegunn/fzf.vim"
+  },
+  gruvbox = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/gruvbox",
+    url = "https://github.com/morhetz/gruvbox"
   },
   harpoon = {
     loaded = true,
@@ -164,15 +174,35 @@ _G.packer_plugins = {
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-nyctophilia"] = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/nvim-nyctophilia",
+    url = "https://github.com/javiorfo/nvim-nyctophilia"
+  },
+  ["nvim-soil"] = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/nvim-soil",
+    url = "https://github.com/javiorfo/nvim-soil"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["open-browser.vim"] = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/open-browser.vim",
+    url = "https://github.com/tyru/open-browser.vim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["plantuml-syntax"] = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/plantuml-syntax",
+    url = "https://github.com/aklt/plantuml-syntax"
   },
   playground = {
     loaded = true,
@@ -219,6 +249,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/tmuxline.vim",
     url = "https://github.com/edkolev/tmuxline.vim"
+  },
+  ["tokyonight.nvim"] = {
+    loaded = true,
+    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   undotree = {
     loaded = true,
