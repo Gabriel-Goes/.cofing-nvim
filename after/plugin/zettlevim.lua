@@ -29,33 +29,82 @@ local function capitalizeFirstLetter(str)
 end
 -------------------------------------------------------------------------------
 
----------------------- ZettleVimCreateBiderecionalLink-------------------------
+
+------------------- ZettelVim - Biderecional Linked Files ---------------------
+-- Função para identificar os blocos de links em um arquivo
+local function findLinksBlock()
+    local parser = vim.treesitter.get_parser(0, "markdown")
+    local tree = parser:parse()[1]
+    local root = tree:root()
+    local start_line, end_line
+    local header = "---- links ---------------------------------------------------------------------"
+    local tail = "--------------------------------------------------------------------------------"
+    -- Percorre a árvore de sintaxe procurando por blocos de links
+    for node in root:iter_children() do
+        if node:type() == "setex_heading" then
+            local node_start_row, _, node_end_row, _ = node:range()
+            -- Ajustar baseado no conteúdo específico do cabeçalho/rodapé de links
+            -- Exemplo: "---- links ---------------------------------------------------------------------"
+            if vim.treesitter.get_node_text(node, 0):match(header) then
+                start_line = node_start_row
+            elseif vim.treesitter.get_node_text(node, 0):match(tail) and start_line then
+                end_line = node_end_row
+                break
+            end
+        end
+    end
+    return start_line, end_line
+end
+-- Função para ler os links de um bloco encontrado
+local function readLinkBlocks(fileContet, startPattern, endPattern)
+    local linkBlocks = {}
+    local block = {}
+    local inBlock = false
+    for _, line in ipairs(fileContet) do
+        if line:find(startPattern) then
+            inBlock = true
+        elseif line:find(endPattern) then
+            inBlock = false
+            table.insert(linkBlocks, block)
+            block = {}
+        elseif inBlock then
+            table.insert(block, line)
+        end
+    end
+    return linkBlocks
+end
+-- Função para Adicionar uma #word a um arquivo
+local function addLinkToFile(filePath, word)
+    local fileContent = vim.fn.readfile(filePath)
+    local linkLine = word
+    if not vim.tbl_contains(fileContent, linkLine) then
+        table.insert(fileContent, 4, linkLine)
+        vim.fn.writefile(fileContent, filePath)
+    end
+end
 -- Função para criar um link bidirecional entre dois arquivos
 function ZettleVimCreateBiderecionalLink(word)
-    -- Verifica se no arquivo atual possui um link para a palavra no formato "#palavra"
+    -- Verifica se no arquivo atual possui um link para a palavra no formato "palavra"
     local currentFileContent = vim.fn.readfile(vim.fn.expand("%:p"))
     local wordExists = false
     -- Verifica se a palavra já existe no arquivo
     for _, line in ipairs(currentFileContent) do
-        if line:find("#" .. word) then
-            print("Link para " .. word .. " já existe")
+        if line:find(word) then
             wordExists = true
             break
         end
     end
     -- Se não houver, adiciona a palavra no topo do arquivo atual como um link
     if not wordExists then
-        table.insert(currentFileContent, 4, "#" .. word)
+        table.insert(currentFileContent, 4, word)
         -- Grava o conteúdo atualizado no arquivo
         vim.fn.writefile(currentFileContent, vim.fn.expand("%:p"))
-        print("Link para #" .. word .. " adicionado")
     end
 end
 -------------------- ZettleVimCreateorFind(word) ------------------------------
 function ZettleVimCreateorFind(word)
     -- Verifica se a palavra é vazia
     if word == "" then
-        print("Sem palavras, tsc tsc tsc ...")
         return
     end
     local filepath = tempestade_path .. word
@@ -67,29 +116,34 @@ function ZettleVimCreateorFind(word)
         local link_line_tail = "--------------------------------------------------------------------------------"
         local arquivoCriador = vim.fn.expand("%:t:r")
         -- Cria o arquivo com título e pula linha, adiciona o link_line_head e link_line_tail
-        vim.fn.writefile({titulo, '', link_line_head, '#' .. arquivoCriador, link_line_tail, ''}, filepath)
+        vim.fn.writefile({titulo, '', link_line_head, arquivoCriador, link_line_tail, ''}, filepath)
         -- Adiciona a palavra ao arquivo "tempestade cerebral" como um indice
         local tempCerebralContent  = vim.fn.readfile(tempCerebralPath)
-        table.insert(tempCerebralContent,"    - #" ..  word)
+        table.insert(tempCerebralContent,"    - " ..  word)
         vim.fn.writefile(tempCerebralContent, tempCerebralPath)
-        print(word .. " adicionado ao arquivo tempestade cerebral")
         -- Cria um link bidirecional no arquivo atual apara a palavra
         ZettleVimCreateBiderecionalLink(word)
     -- Se a palavra já existe, checa se o arquivo atual já possui um link para a palavra
     else
         ZettleVimCreateBiderecionalLink(word)
     end
+        local currentFile = vim.fn.expand("%:p")
+        -- Adiciona um link para o arquivo atual no arquivo da palavra
+        addLinkToFile(filepath, vim.fn.expand("%:t:r"))
+        -- Adiciona um link para a palavra no arquivo atual
+        addLinkToFile(currentFile, word)
         -- abre o arquivo existente
         vim.cmd('edit ' .. filepath)
 end
 -------------------------------------------------------------------------------
 -- CreatorFind Visual Mode
 vim.keymap.set("v", "gF", function()
+    -- Salva o arquivo atual
+    vim.cmd("w")
     -- Yank a seleção do buffer no visual mode, e apenas a seleção ao registro 'a'
     vim.cmd("normal! \"ay")
     -- Imediatamente após o yan, obtém a seleção do registro 'a' e armazena na variável selection
     local selection = vim.fn.getreg("a")
-    print("Seleção: " .. selection)
     -- Chama a função ZettleVimCreateorFind com a seleção
     ZettleVimCreateorFind(selection)
     -- limpa o registro 'a'
@@ -97,7 +151,7 @@ vim.keymap.set("v", "gF", function()
 end, {noremap = true, silent = true})
 -- CreatorFind Normal Mode
 vim.keymap.set("n", "<leader>gg", function()
-    print("Comando <leader>gg executado ...")
+    vim.cmd("w")
     local word = vim.fn.expand("<cword>")
     ZettleVimCreateorFind(word)
 end, {noremap = true, silent = true})

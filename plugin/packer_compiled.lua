@@ -189,11 +189,6 @@ _G.packer_plugins = {
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["open-browser.vim"] = {
-    loaded = true,
-    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/open-browser.vim",
-    url = "https://github.com/tyru/open-browser.vim"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/packer.nvim",

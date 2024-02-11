@@ -78,8 +78,5 @@ return require('packer').startup(function(use)
     use 'javiorfo/nvim-soil'
     use 'javiorfo/nvim-nyctophilia'
     use 'aklt/plantuml-syntax'
-
-    -- Open in browser
-    use 'tyru/open-browser.vim'
 end)
 
