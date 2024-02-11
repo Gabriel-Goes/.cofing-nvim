@@ -3,7 +3,6 @@ vim.keymap.set("n","<leader>gs", vim.cmd.Git)
 
 -- Função para adicionar todos os arquivos do diretório atual ao git
 function vim.cmd.GitAddLocal()
-    print('oi')
     -- Checa o diretório atual
     -- Se não estiver no diretório do arquivo do buffer, retorna
     if vim.fn.expand("%:p:h") ~= vim.fn.getcwd() then
@@ -34,7 +33,7 @@ function vim.cmd.GitCommit()
     if message == "" then
         vim.cmd("Git commit")
     else
-        vim.cmd("Git commit -m " .. message)
+        vim.cmd('Git commit -m "' .. message .. '"')
     end
 end
 vim.keymap.set("n","<leader>gA", vim.cmd.GitAddLocal)
