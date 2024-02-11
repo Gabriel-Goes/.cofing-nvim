@@ -32,53 +32,68 @@ end
 
 ------------------- ZettelVim - Biderecional Linked Files ---------------------
 -- Função para identificar os blocos de links em um arquivo
-local function findLinksBlock()
+local function findLinksBlock(filepath)
     local parser = vim.treesitter.get_parser(0, "markdown")
     local tree = parser:parse()[1]
     local root = tree:root()
-    local start_line, end_line
-    local header = "---- links ---------------------------------------------------------------------"
-    local tail = "--------------------------------------------------------------------------------"
+    local header = "^---- links ----"
+    local tail = "^---+$"
+    local in_block = false
+    local start_block, end_block
+    local blocks = {}
     -- Percorre a árvore de sintaxe procurando por blocos de links
     for node in root:iter_children() do
-        if node:type() == "setex_heading" then
-            local node_start_row, _, node_end_row, _ = node:range()
-            -- Ajustar baseado no conteúdo específico do cabeçalho/rodapé de links
-            -- Exemplo: "---- links ---------------------------------------------------------------------"
-            if vim.treesitter.get_node_text(node, 0):match(header) then
-                start_line = node_start_row
-            elseif vim.treesitter.get_node_text(node, 0):match(tail) and start_line then
-                end_line = node_end_row
-                break
+        if node:type() == "paragraph" then
+            local text = vim.treesitter.get_node_text(node, 0)
+            if text:match(header) and not in_block then
+                start_block = node:start()
+                in_block = true
+            elseif text:match(tail) and in_block then
+                end_block = node:end_()
+                table.insert(blocks, {start = start_block, ["end"] = end_block})
+                in_block = false
             end
         end
     end
-    return start_line, end_line
+    return blocks
 end
 -- Função para ler os links de um bloco encontrado
-local function readLinkBlocks(fileContet, startPattern, endPattern)
-    local linkBlocks = {}
-    local block = {}
-    local inBlock = false
-    for _, line in ipairs(fileContet) do
-        if line:find(startPattern) then
-            inBlock = true
-        elseif line:find(endPattern) then
-            inBlock = false
-            table.insert(linkBlocks, block)
-            block = {}
-        elseif inBlock then
-            table.insert(block, line)
+local function readLinkBlocks(filepath, blocks)
+    local all_links = {}
+    if blocks and #blocks > 0 then
+
+        local file_content = vim.fn.readfile(filepath)
+        for _, block in ipairs(blocks) do
+            local links = {}
+            for i = block.start + 1, block["end"] - 1 do
+                local line = file_content[i]
+                if line:match("^#") then
+                    table.insert(links, line)
+                end
+            end
+            table.insert(all_links, links)
         end
     end
-    return linkBlocks
+    return all_links
+end
+-- Função para processar os arquivos  e retornar os links
+local function processMarkdownFile(filepath)
+    local blocks = findLinksBlock(filepath)
+    local links = {}
+    if #blocks > 0 then
+        links = readLinkBlocks(filepath, blocks)
+    else
+        print("Nenhum bloco de links encontrado")
+    end
+    return links
 end
 -- Função para Adicionar uma #word a um arquivo
 local function addLinkToFile(filePath, word)
     local fileContent = vim.fn.readfile(filePath)
-    local linkLine = word
-    if not vim.tbl_contains(fileContent, linkLine) then
-        table.insert(fileContent, 4, linkLine)
+    local links = processMarkdownFile(filePath)
+    -- se não houver word em links, adiciona a palavra
+    if not vim.tbl_contains(links[1] or {}, word) then
+        table.insert(fileContent, 4, word)
         vim.fn.writefile(fileContent, filePath)
     end
 end
