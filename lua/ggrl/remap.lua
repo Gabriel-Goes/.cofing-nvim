@@ -14,5 +14,10 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- change buffers with Alt + j/k
 vim.keymap.set("n", "<A-k>", "<cmd>bn<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-j>", "<cmd>bp<CR>", { noremap = true, silent = true })
--- Set all files at this dir into .md filetype
+-- Delete buffer
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>",
+               { noremap = true, silent = true })
+-- Save file
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>",
+               { noremap = true, silent = true })
 print("lua/ggrl/remap.lua carregado com sucesso!")
