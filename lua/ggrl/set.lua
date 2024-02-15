@@ -32,4 +32,5 @@ vim.opt.foldcolumn = "1"
 vim.opt.signcolumn = "yes:1"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
-print("lua/ggrl/set.lua carregado com sucesso!")
+vim.opt.runtimepath:append("/home/ggrl/projetos/ZettelVim/")
+--print("lua/ggrl/set.lua carregado com sucesso!")

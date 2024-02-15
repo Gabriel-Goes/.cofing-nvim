@@ -5,6 +5,7 @@ require('telescope').setup{
         live_grep = {
             prompt = 'Live Grep > ',
             input = '',
+            hidden = true
         },
         fzf = {
             fuzzy = true,                    -- false will only do exact matching

@@ -22,7 +22,8 @@ local on_attach = function(clinet, bufnr)
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 -- Configurações VIMdiagnostic
-vim.api.nvim_create_autocmd({"CursorHold"}, {
+-- Enable floating window in normal mode and disable in insert mode
+vim.api.nvim_create_autocmd({"CursorHold",}, {
     callback = function()
         if vim.api.nvim_get_mode().mode == "n" then
             vim.diagnostic.virtual_text = false
@@ -36,7 +37,8 @@ vim.api.nvim_create_autocmd({"CursorHold"}, {
                 source = 'always',
                 prefix = ' ',
                 scope = 'cursor',
-            })
+            },
+            vim.diagnostic.hint)
         end
 
     end,
@@ -45,9 +47,14 @@ vim.diagnostic.config({
     -- enable buffer diagnostics hover mouse
     virtual_text = false,
     signs = true,
-    update_in_insert = true,
+    update_in_insert = false,
     underline = true,
     severity_sort = true,
+    hint = {
+        source = "true",
+        preview = true,
+        scope = "buffer",
+    },
     float = {
         source = "true",
         preview = true,
@@ -123,4 +130,4 @@ require'lspconfig'.marksman.setup{
         }
     }
 }
-print("LSP Carregado com sucesso")
+--print("LSP Carregado com sucesso")

@@ -20,4 +20,4 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>",
 -- Save file
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>",
                { noremap = true, silent = true })
-print("lua/ggrl/remap.lua carregado com sucesso!")
+--print("lua/ggrl/remap.lua carregado com sucesso!")
