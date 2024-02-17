@@ -39,5 +39,5 @@ end
 -- Keymaps para as funções
 vim.keymap.set("n","<leader>gA", vim.cmd.GitAddLocal)
 vim.keymap.set("n","<leader>gc", vim.cmd.GitCommit)
-vim.keymap.set("n","<leader>gp", vim.cmd.GitPush)
+-- vim.keymap.set("n","<leader>gp", vim.cmd.GitPush)
 vim.keymap.set("n","<leader>gG", '!gitgraph')

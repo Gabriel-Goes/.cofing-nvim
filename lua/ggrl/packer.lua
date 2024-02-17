@@ -78,5 +78,9 @@ return require('packer').startup(function(use)
     use 'javiorfo/nvim-soil'
     use 'javiorfo/nvim-nyctophilia'
     use 'aklt/plantuml-syntax'
+
+    -- ZettelVim
+    use {'Gabriel-Goes/ZettelVim'}
+
 end)
 

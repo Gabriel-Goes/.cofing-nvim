@@ -5,11 +5,9 @@
 -- Version: 0.1
 -- License: GPL
 -- Description: Pluggin para transformar o neovim em um zettelkasten machine
+-- ZettelVim/lua/zettelvim.lua
 
 ---- Configurações ------------------------------------------------------------
-require("after.plugin.core")
-require("after.plugin.testes")
-
 -- Path para o diretório de tempestade cerebral
 local tempestade_path = os.getenv("NVIM_TEMPESTADE")
 
@@ -17,7 +15,7 @@ local tempestade_path = os.getenv("NVIM_TEMPESTADE")
 local function setMarkdonwFileType()
     -- Obtém o caminho completo do arquivo atual
     local nota_fonte_path = vim.fn.expand("%:p")
-    -- verifica se o caminho da nota_fonte está dentro do tempestade_path 
+    -- verifica se o caminho da nota_fonte está dentro do tempestade_path
     if nota_fonte_path:sub(1, #tempestade_path) == tempestade_path then
         -- Ajusta o filetype para markdown
         vim.bo.filetype = "markdown"
@@ -191,7 +189,7 @@ function ZettleVimCreateorFind(nota_alvo)
 end
 -------------------------------------------------------------------------------
 ---- CreatorFind Normal Mode
-vim.keymap.set("n", "<leader>gg", function()
+vim.keymap.set("n", "<leader>zf", function()
     vim.cmd("w")
     local nota_alvo = vim.fn.expand("<cword>")
     ZettleVimCreateorFind(nota_alvo)
@@ -199,7 +197,7 @@ vim.keymap.set("n", "<leader>gg", function()
     vim.cmd("e " .. tempestade_path .. nota_alvo)
 end, {noremap = true, silent = true})
 ---- CreatorFind Visual Mode
-vim.keymap.set("v", "gF", function()
+vim.keymap.set("v", "zf", function()
     -- Salva o arquivo atual
     vim.cmd("w")
     -- Yank a seleção do buffer no visual mode, e apenas a seleção ao registro 'a'
@@ -215,5 +213,3 @@ vim.keymap.set("v", "gF", function()
 end, {noremap = true, silent = true})
 -------------------------------------------------------------------------------
 print("ZettleVim carregado com sucesso")
-
-

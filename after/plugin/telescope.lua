@@ -1,5 +1,6 @@
 -- Telescope
 require('telescope').load_extension('fzf')
+
 require('telescope').setup{
     extensions = {
         live_grep = {
