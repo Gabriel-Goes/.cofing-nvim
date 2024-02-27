@@ -1,6 +1,4 @@
 -- Configurações do Vim Fugitive
-vim.keymap.set("n","<leader>gs", vim.cmd.Git)
-
 -- Função para adicionar todos os arquivos do diretório atual ao git
 function vim.cmd.GitAddLocal()
     -- Checa o diretório atual
@@ -36,8 +34,12 @@ function vim.cmd.GitCommit()
         vim.cmd('Git commit -m "' .. message .. '"')
     end
 end
+
+-- Função para mostrar git log --graph --oneline --all --decorate no  gs
+--
+
 -- Keymaps para as funções
+vim.keymap.set("n","<leader>gs", vim.cmd.Git)
 vim.keymap.set("n","<leader>gA", vim.cmd.GitAddLocal)
 vim.keymap.set("n","<leader>gc", vim.cmd.GitCommit)
 -- vim.keymap.set("n","<leader>gp", vim.cmd.GitPush)
-vim.keymap.set("n","<leader>gG", '!gitgraph')

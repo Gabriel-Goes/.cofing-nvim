@@ -80,7 +80,7 @@ return require('packer').startup(function(use)
     use 'aklt/plantuml-syntax'
 
     -- ZettelVim
-    use {'Gabriel-Goes/ZettelVim'}
+    --use {'Gabriel-Goes/ZettelVim'}
 
 end)
 

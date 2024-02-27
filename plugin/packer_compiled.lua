@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ZettelVim = {
-    loaded = true,
-    path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/ZettelVim",
-    url = "https://github.com/Gabriel-Goes/ZettelVim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/ggrl/.local/share/nvim/site/pack/packer/start/cmp-buffer",

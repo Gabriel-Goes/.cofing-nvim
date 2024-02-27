@@ -1,10 +1,11 @@
-print('Hello, from after.plugin.zettelvim')
+-- Add path to lua files package.path
+local zettelvim_path = vim.fn.expand('/home/ggrl/projetos/ZettelVim/lua/?.lua')
+package.path = package.path .. ';' .. vim.fn.expand(zettelvim_path)
 
-local callZettel = require('zettelvim.config')
+require('zettelvim.init')
+local zettelvim_config = require('zettelvim.config')
 
----- CreatorFind Normal Mode
-vim.keymap.set("n", "<leader>zf", callZettel.NormalCall(), {noremap = true, silent = true})
----- CreatorFind Visual Mode
-vim.keymap.set("v", "zf", callZettel.VisualCall(), {noremap = true, silent = true})
-
-print("ZettelVim carregado com sucesso!")
+zettelvim_config.setup({
+    visual_mode_keymap = 'bf',
+    normal_mode_keymap = '<leader>bf',
+})
