@@ -1,7 +1,5 @@
 -- Nvim remaps
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>",
-               { noremap = true, silent = true })
 -- Copilot remaps
 vim.g.copilot_no_tab_map=true
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")',
@@ -20,4 +18,9 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>",
 -- Save file
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>",
                { noremap = true, silent = true })
+-- remap para chmod +x
+vim.keymap.set("n", "<leader>cx", "<cmd>!chmod +x %<CR>",
+               { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>pv', ':NvimTreeToggle<CR>')
 --print("lua/ggrl/remap.lua carregado com sucesso!")
+--

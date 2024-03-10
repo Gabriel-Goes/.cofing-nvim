@@ -72,7 +72,12 @@ return require('packer').startup(function(use)
 
     -- Colors
     use 'folke/tokyonight.nvim'
+    use 'folke/lsp-colors.nvim'
     use 'morhetz/gruvbox'
+    use 'sainnhe/sonokai'
+    use 'savq/melange'
+    use 'sainnhe/everforest'
+    use { "catppuccin/nvim", as = "catppuccin" }
 
     -- UML plugin
     use 'javiorfo/nvim-soil'
@@ -82,5 +87,8 @@ return require('packer').startup(function(use)
     -- ZettelVim
     --use {'Gabriel-Goes/ZettelVim'}
 
-end)
+    -- File Explorer 
+    use 'nvim-tree/nvim-tree.lua'
+    use 'nvim-tree/nvim-web-devicons'
 
+end)
