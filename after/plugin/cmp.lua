@@ -21,13 +21,13 @@ cmp.setup({
           ['<C-e>'] = cmp.mapping.close(),
           ['<C-y>'] = cmp.mapping.confirm({ select = true }),
       }),
---      sources = cmp.config.sources({
---          { name = 'nvim_lsp' },
---          { name = 'luasnip' },
---          { name = 'buffer' },
---          { name = 'path' },
+      sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+          { name = 'path' },
 --          { name = 'cmdline' },
---      })
+      })
 })
 -- Set configuration for spcific filetypes
  cmp.setup.filetype('gitcommit', {
