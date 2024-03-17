@@ -1,6 +1,6 @@
+print('Hello, from after/plugin/treesitter.lua')
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"markdown", "python", "c", "lua", "vim", "help",
-                        "latex"},
+    ensure_installed = {'python', 'markdown', 'lua', 'latex'},
     sync_install = true,
     auto_install = true,
     highlight = {

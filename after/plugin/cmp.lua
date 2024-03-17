@@ -30,32 +30,34 @@ cmp.setup({
       })
 })
 -- Set configuration for spcific filetypes
- cmp.setup.filetype('gitcommit', {
-     sources = cmp.config.sources({
-         { name = 'git' },
-     }, {
-         { name = 'buffer' },
-     })
- })
- -- Use buffer for '/' and '?' (if you enabled 'native_menu', this wont work)
- cmp.setup.cmdline({ '/', '?' }, {
-     mapping = cmp.mapping.preset.cmdline(),
-     sources = {
-         { name = 'buffer' }
-     }
- })
--- use cmdline & path source for ':' (if you enabled 'native_menu', this wont work)
- cmp.setup.cmdline(':', {
-     mapping = cmp.mapping.preset.cmdline(),
-     sources = cmp.config.sources({
-         { name = 'path' }
-     }, {
-         { name = 'cmdline' },
-     })
- })
- local capabilities = require('cmp_nvim_lsp').default_capabilities()
- -- Replace <pylsp> with each lsp server you've enabled.
- require('lspconfig').pylsp.setup {
-     capabilities = capabilities
- }
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+        { name = 'git' },
+    }, {
+        { name = 'buffer' },
+    })
+})
+
+-- Use buffer for '/' and '?' (if you enabled 'native_menu', this wont work)
+cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = 'buffer' }
+    }
+})
+
+-- Use cmdline & path source for ':' (if you enabled 'native_menu', this wont work)
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' },
+    })
+})
+
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- require('lspconfig').pylsp.setup {
+--     capabilities = capabilities
+-- }
 -- print("CMP carregado com sucesso!")

@@ -2,10 +2,16 @@
 -- after/plugin/lsp.lua
 -- Last Change: 2024-02-03 20:46
 -- LSP Native
+print('Hello, from after/plugin/lsp.lua')
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman' },
+})
 local lsp = require('lsp-zero')
 lsp.setup()
+
 -- On attach function
-local on_attach = function(clinet, bufnr)
+local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local opts = { noremap = true, silent = true }
     -- Mapeamento de teclas
@@ -21,6 +27,7 @@ local on_attach = function(clinet, bufnr)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
+
 -- Configurações VIMdiagnostic
 -- Enable floating window in normal mode and disable in insert mode
 vim.api.nvim_create_autocmd({"CursorHold",}, {
@@ -43,6 +50,7 @@ vim.api.nvim_create_autocmd({"CursorHold",}, {
 
     end,
 })
+
 vim.diagnostic.config({
     -- enable buffer diagnostics hover mouse
     virtual_text = false,
@@ -61,6 +69,7 @@ vim.diagnostic.config({
         scope = "buffer",
     }
 })
+
 -- Change diagnostic symbols in the sign column (gutter)
 local signs = { Error = "󰅚",
                 Warn = "󰀪",
@@ -72,7 +81,9 @@ for type, icon in pairs(signs) do
                            texthl = hl,
                            numhl = "" })
 end
+
 -- LSP CLIENTS
+print('Configurando LSP CLIENTS')
 -------------- Lua_lsp
 require'lspconfig'.lua_ls.setup{
     on_attach = on_attach,
@@ -87,9 +98,10 @@ require'lspconfig'.lua_ls.setup{
         },
     }
 }
+
 -------------- Pylsp
 require'lspconfig'.pylsp.setup{
-    cmd = {"/home/ggrl/.config/ambiente_geologico/bin/pylsp"},
+--    cmd = {"/home/ggrl/.config/ambiente_geologico/bin/pylsp"},
     on_attach = on_attach,
     settings = {
         pylsp = {
@@ -107,6 +119,7 @@ require'lspconfig'.pylsp.setup{
        },
     }
 }
+-------------- LaTex
 require'lspconfig'.ltex.setup{
     on_attach = on_attach,
     filetypes = {"tex", "bib"},
@@ -120,6 +133,7 @@ require'lspconfig'.ltex.setup{
         }
     }
 }
+
 -------------- Marksman
 require'lspconfig'.marksman.setup{
     on_attach = on_attach,
@@ -130,4 +144,5 @@ require'lspconfig'.marksman.setup{
         }
     }
 }
---print("LSP Carregado com sucesso")
+
+print("LSP Carregado com sucesso")
