@@ -2,12 +2,11 @@
 -- after/plugin/lsp.lua
 -- Last Change: 2024-02-03 20:46
 -- LSP Native
-print('Hello, from after/plugin/lsp.lua')
+-- print('Hello, from after/plugin/lsp.lua')
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman',
-                         'bashls',
-                      },
+--    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman',
+--                          'bashls',},
 })
 local lsp = require('lsp-zero')
 lsp.setup()
@@ -85,7 +84,7 @@ for type, icon in pairs(signs) do
 end
 
 -- LSP CLIENTS
-print('Configurando LSP CLIENTS')
+-- print('Configurando LSP CLIENTS')
 -------------- Lua_lsp
 require'lspconfig'.lua_ls.setup{
     on_attach = on_attach,
