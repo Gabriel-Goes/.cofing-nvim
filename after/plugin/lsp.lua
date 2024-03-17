@@ -5,7 +5,9 @@
 print('Hello, from after/plugin/lsp.lua')
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman' },
+    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman',
+                         'bashls',
+                      },
 })
 local lsp = require('lsp-zero')
 lsp.setup()
