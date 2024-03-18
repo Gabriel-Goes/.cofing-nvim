@@ -128,7 +128,7 @@ require'lspconfig'.ltex.setup{
         ltex = {
             language = "pt-BR",
             dictionary = {
-                ["pt-BR"] = vim.fn.readfile(vim.fn.expand("/home/ggrl/.config/nvim/dictionary/pt-BR.dic")),
+                ["pt-BR"] = vim.fn.readfile(vim.fn.expand("~/.config/nvim/dictionary/pt-BR.dic")),
             },
             enabled = true,
         }
