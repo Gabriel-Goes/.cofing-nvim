@@ -146,4 +146,4 @@ require'lspconfig'.marksman.setup{
     }
 }
 
-print("LSP Carregado com sucesso")
+-- print("LSP Carregado com sucesso")
