@@ -3,10 +3,12 @@
 -- Last Change: 2024-02-03 20:46
 -- LSP Native
 -- print('Hello, from after/plugin/lsp.lua')
-require('mason').setup()
+    require('mason').setup()
 require('mason-lspconfig').setup({
 --    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman',
---                          'bashls',},
+    --                          'bashls',},
+    sync_install = true,
+    auto_install = true,
 })
 local lsp = require('lsp-zero')
 lsp.setup()

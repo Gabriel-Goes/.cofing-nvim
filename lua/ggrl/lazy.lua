@@ -14,7 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    
+
     "folke/which-key.nvim",
     { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/neodev.nvim",
@@ -29,11 +29,11 @@ local plugins = {
     'mbbill/undotree',
     'theprimeagen/harpoon',
     'tpope/vim-fugitive',
+    'nvim-lua/popup.nvim',
+    'nvim-lua/plenary.nvim',
 -- Treesitter
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/playground',
-    'nvim-lua/popup.nvim',
-    'nvim-lua/plenary.nvim',
 -- LSP Support
     'VonHeikemen/lsp-zero.nvim',
     'neovim/nvim-lspconfig',
@@ -56,34 +56,36 @@ local plugins = {
     'nvim-neotest/neotest-python',
     'sharkdp/fd',
 -- Airline
-     'vim-airline/vim-airline',
-     'vim-airline/vim-airline-themes',
-     'edkolev/tmuxline.vim',
+    'vim-airline/vim-airline',
+    'vim-airline/vim-airline-themes',
+    'edkolev/tmuxline.vim',
 -- Colors
-     'folke/tokyonight.nvim',
-     'folke/lsp-colors.nvim',
-     'morhetz/gruvbox',
-     'sainnhe/sonokai',
-     'savq/melange',
-     'sainnhe/everforest',
-     { "catppuccin/nvim", as = "catppuccin" },
-     ({'rose-pine/neovim',
-         as = 'rose-pine',
-         config = function()
-             vim.cmd('colorscheme rose-pine')
-         end
-     }),
+    'folke/tokyonight.nvim',
+    'folke/lsp-colors.nvim',
+    'morhetz/gruvbox',
+    'sainnhe/sonokai',
+    'savq/melange',
+    'sainnhe/everforest',
+    { "catppuccin/nvim", as = "catppuccin" },
+    ({'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    }),
 -- UML plugin
-     'javiorfo/nvim-soil',
-     'javiorfo/nvim-nyctophilia',
-     'aklt/plantuml-syntax',
+    'javiorfo/nvim-soil',
+    'javiorfo/nvim-nyctophilia',
+    'aklt/plantuml-syntax',
 -- ZettelVim
-     'Gabriel-Goes/ZettelVim',
+    'Gabriel-Goes/ZettelVim',
 -- File Explorer 
-     'nvim-tree/nvim-tree.lua',
-     'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-tree.lua',
+    'nvim-tree/nvim-web-devicons',
 -- Markdown Preview   
-     "iamcco/markdown-preview.nvim",
+    "iamcco/markdown-preview.nvim",
+-- Github Copilot
+    'github/copilot.vim',
 }
 
 require("lazy").setup(plugins, opts)
