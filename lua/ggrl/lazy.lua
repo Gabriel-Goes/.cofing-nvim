@@ -1,4 +1,4 @@
---print('Hello, from lua/ggrl/lazy.lua')
+print('Hello, from lua/ggrl/lazy.lua')
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -73,6 +73,9 @@ local plugins = {
             vim.cmd('colorscheme rose-pine')
         end
     }),
+-- Cursor
+    'yamatsum/nvim-cursorline',
+    'mawkler/modicator.nvim',
 -- UML plugin
     'javiorfo/nvim-soil',
     'javiorfo/nvim-nyctophilia',
