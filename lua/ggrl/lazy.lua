@@ -55,10 +55,14 @@ local plugins = {
     'nvim-neotest/neotest',
     'nvim-neotest/neotest-python',
     'sharkdp/fd',
--- Airline
-    'vim-airline/vim-airline',
-    'vim-airline/vim-airline-themes',
+-- Status Line
+--    'vim-airline/vim-airline',
+--    'vim-airline/vim-airline-themes',
     'edkolev/tmuxline.vim',
+--    'tjdevries/express_line.nvim',
+    { 'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
 -- Colors
     'folke/tokyonight.nvim',
     'folke/lsp-colors.nvim',
@@ -86,7 +90,13 @@ local plugins = {
     'nvim-tree/nvim-tree.lua',
     'nvim-tree/nvim-web-devicons',
 -- Markdown Preview   
-    "iamcco/markdown-preview.nvim",
+    -- install without yarn or npm
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 -- Github Copilot
     'github/copilot.vim',
 }
