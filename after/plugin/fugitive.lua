@@ -45,7 +45,7 @@ function vim.cmd.GitPush()
     if vim.fn.system("git rev-parse --is-inside-work-tree") == 1 then
         return
     -- Se Git remove -v retornar 'fatal'
-    elseif vim.cmd("Git remote -v") == "" then
+    elseif vim.cmd("Git remote -v") == 0 then
         vim.cmd("Git remote add origin")
         print("Repositório não tem um remote")
         return
