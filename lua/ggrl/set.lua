@@ -7,6 +7,8 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 -- Configurações do nvim
+-- buffer tabs
+vim.opt.hidden = false
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.guicursor = ""

@@ -3,7 +3,7 @@
 -- Last Change: 2024-02-03 20:46
 -- LSP Native
 -- print('Hello, from after/plugin/lsp.lua')
-    require('mason').setup()
+require('mason').setup()
 require('mason-lspconfig').setup({
 --    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman',
     --                          'bashls',},
@@ -101,14 +101,39 @@ require'lspconfig'.lua_ls.setup{
         },
     }
 }
-
 -------------- Pylsp
 require'lspconfig'.pylsp.setup{
---    cmd = {"/home/ggrl/.config/ambiente_geologico/bin/pylsp"},
+    cmd = {"/home/ggrl/.local/share/nvim/mason/bin/pylsp"},
     on_attach = on_attach,
     settings = {
         pylsp = {
             plugins = {
+                pyflakes = {
+                    enabled = true,
+                },
+                jedi_completion = {
+                    enabled = true,
+                },
+                jedi_hover = {
+                    enabled = true,
+                },
+                jedi_references = {
+                    enabled = true,
+                },
+                jedi_signature_help = {
+                    enabled = true,
+                },
+                jedi_symbols = {
+                    enabled = true,
+                    all_scopes = true,
+                },
+                pyls_my = {
+                    enabled = true,
+                },
+                pylsp_black = {
+                    enabled = true,
+                    line_length = 88,
+                },
                 pycodestyle = {
                     enabled = true,
                     ignore = {'E501'},
