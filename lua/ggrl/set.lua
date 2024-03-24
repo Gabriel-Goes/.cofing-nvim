@@ -40,4 +40,5 @@ vim.opt.foldcolumn = "1"
 vim.opt.signcolumn = "yes:1"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
+vim.opt.titlestring = "%<%F%=%l/%L - nvim"
 --print("lua/ggrl/set.lua carregado com sucesso!")

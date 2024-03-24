@@ -3,6 +3,7 @@
 -- Last Change: 2024-02-03 20:46
 -- LSP Native
 -- print('Hello, from after/plugin/lsp.lua')
+--  Mason LSP
 require('mason').setup()
 require('mason-lspconfig').setup({
 --    ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'marksman',
@@ -10,15 +11,20 @@ require('mason-lspconfig').setup({
     sync_install = true,
     auto_install = true,
 })
+-- Neoconf
+require('neoconf').setup({
+
+})
+-- LSP Zero
 local lsp = require('lsp-zero')
 lsp.setup()
-
 -- On attach function
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local opts = { noremap = true, silent = true }
     -- Mapeamento de teclas
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)

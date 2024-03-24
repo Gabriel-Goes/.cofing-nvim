@@ -15,7 +15,14 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
-    "folke/which-key.nvim",
+    {"folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {}
+    },
     { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/neodev.nvim",
 -- Telescope
@@ -56,8 +63,9 @@ local plugins = {
     'nvim-neotest/neotest-python',
     'sharkdp/fd',
 -- Status Line
---    'vim-airline/vim-airline',
---    'vim-airline/vim-airline-themes',
+    { 'akinsho/bufferline.nvim',
+        version = "*",
+        dependencies = 'nvim-tree/nvim-web-devicons'},
     'edkolev/tmuxline.vim',
 --    'tjdevries/express_line.nvim',
     { 'nvim-lualine/lualine.nvim',
