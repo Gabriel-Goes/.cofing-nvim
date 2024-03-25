@@ -37,24 +37,12 @@ end
 
 -- Função para mostrar git log --graph --oneline --all --decorate no  gs
 function vim.cmd.GitGraph()
-    vim.cmd("Git log --graph --oneline --all --decorate")
+    vim.cmd("Git log --graph --oneline --all --decorate --abbrev-commit")
 end
 
 -- Função para fazer push no repositório
 function vim.cmd.GitPush()
-    if vim.fn.system("git rev-parse --is-inside-work-tree") == 1 then
-        return
-    -- Se Git remove -v retornar 'fatal'
-    elseif vim.cmd("Git remote -v") == 'fatal'  then
-        vim.cmd("Git remote add origin")
-        print("Repositório não tem um remote")
-        return
-    else
-        local result = vim.fn.system("git push")
-        if result == 0 then
-            print("Push bem sucedido")
-        end
-    end
+    vim.cmd("Git push")
 end
 
 -- Keymaps para as funções
