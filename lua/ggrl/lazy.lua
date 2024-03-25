@@ -88,6 +88,11 @@ local plugins = {
 -- Cursor
     'yamatsum/nvim-cursorline',
     'mawkler/modicator.nvim',
+    { 'gen740/SmoothCursor.nvim',
+        config = function()
+            require('smoothcursor').setup()
+        end
+    },
 -- UML plugin
     'javiorfo/nvim-soil',
     'javiorfo/nvim-nyctophilia',
