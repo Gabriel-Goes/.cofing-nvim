@@ -1,12 +1,19 @@
+local function get_env_name()
+  local venv_path = os.getenv("VIRTUAL_ENV")
+  if venv_path then
+    local name = venv_path:match("^.+/(.+)$")
+    return name and " " .. name or "NO ENV"
+  else
+    return "NO ENV"
+  end
+end
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
         theme = 'auto',
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
-
-
-
         disabled_filetypes = {
             statusline = {},
             winbar = {},
@@ -22,7 +29,11 @@ require('lualine').setup {
     },
     sections = {
         lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_b = {
+            {function() return get_env_name() end,
+            cond = function() return vim.bo.filetype == 'python' end  -- Exibir somente para arquivos python
+            },
+            'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
         lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
@@ -31,7 +42,7 @@ require('lualine').setup {
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {'filename'},
+        lualine_c = {},
         lualine_x = {'location'},
         lualine_y = {},
         lualine_z = {}
@@ -41,3 +52,4 @@ require('lualine').setup {
     inactive_winbar = {},
     extensions = {}
 }
+
