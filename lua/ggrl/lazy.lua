@@ -1,4 +1,4 @@
-print('Hello, from lua/ggrl/lazy.lua')
+--print('Hello, from lua/ggrl/lazy.lua')
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -93,12 +93,24 @@ local plugins = {
             require('smoothcursor').setup()
         end
     },
+-- Start Screen
+--    'glepnir/dashboard-nvim',
+--    'mhinz/vim-startify',
+    { 'goolord/alpha-nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'nvim-lua/plenary.nvim',
+        },
+        config = function()
+            require'alpha'.setup(require'alpha.themes.dashboard'.config)
+        end
+    },
 -- UML plugin
     'javiorfo/nvim-soil',
     'javiorfo/nvim-nyctophilia',
     'aklt/plantuml-syntax',
 -- ZettelVim
-    'Gabriel-Goes/ZettelVim',
+   -- 'Gabriel-Goes/ZettelVim',
 -- File Explorer 
     'nvim-tree/nvim-tree.lua',
     'nvim-tree/nvim-web-devicons',

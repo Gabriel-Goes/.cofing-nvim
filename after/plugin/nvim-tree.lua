@@ -70,7 +70,7 @@ end
     -- pass to setup along with your other options
 require("nvim-tree").setup {
     on_attach = my_on_attach,
-    view = {width = 40,},
+    view = {width = 30,},
     renderer = {group_empty = true,
     },
     filters = {dotfiles = true,
