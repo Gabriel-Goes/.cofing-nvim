@@ -2,9 +2,9 @@
 -- after/plugin/set.lua
 -- Last Change: 2024-02-05 00:48
 --
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.termguicolors = true
 vim.opt.hidden = false
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
@@ -34,4 +34,8 @@ vim.opt.foldcolumn = "1"
 vim.opt.signcolumn = "yes:1"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
---print("lua/ggrl/set.lua carregado com sucesso!")
+vim.opt.shell = 'bash'
+vim.opt.shellcmdflag = '-c'
+vim.opt.shellredir = '>%s 2>&1'
+vim.opt.shellpipe = '2>&1| tee'
+vim.opt.termguicolors = true

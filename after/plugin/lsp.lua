@@ -108,8 +108,9 @@ require'lspconfig'.lua_ls.setup{
     }
 }
 -------------- Pylsp
+local home_user = os.getenv('HOME')
 require'lspconfig'.pylsp.setup{
-    cmd = {"/home/ggrl/.local/share/nvim/mason/bin/pylsp"},
+    cmd = {home_user .. "/.local/share/nvim/mason/bin/pylsp"},
     on_attach = on_attach,
     settings = {
         pylsp = {
