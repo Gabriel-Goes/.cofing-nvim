@@ -2,7 +2,6 @@
 -- after/plugin/set.lua
 -- Last Change: 2024-02-05 00:48
 --
-
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.hidden = false
@@ -39,3 +38,9 @@ vim.opt.shellcmdflag = '-c'
 vim.opt.shellredir = '>%s 2>&1'
 vim.opt.shellpipe = '2>&1| tee'
 vim.opt.termguicolors = true
+vim.cmd([[autocmd TermOpen * setlocal winhighlight=Normal:NormalFloat]])
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<C-h>', [[<C-\><C-n><C-w>h]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<C-j>', [[<C-\><C-n><C-w>j]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<C-k>', [[<C-\><C-n><C-w>k]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<C-l>', [[<C-\><C-n><C-w>l]], {noremap = true, silent = true})

@@ -24,15 +24,15 @@ vim.keymap.set("n", "<leader>cx", "<cmd>!chmod +x %<CR>",
 vim.keymap.set('n', '<leader>pv', ':NvimTreeToggle<CR>')
 
 -- keymap to source current file
-vim.keymap.set("n", "<leader>cc", "<cmd>source %<CR>",
-    { noremap = true, silent = true })
-
-
+vim.keymap.set("n", "<leader>cc", "<cmd>update<CR>:source %<CR>",
+               { noremap = true, silent = true })
 
 -- Terminal
 -- Keymap to open :term in a new window bellow the current one
 vim.keymap.set("n", "<leader>tt", "<cmd>botright 15split term://$SHELL<CR>",
                { noremap = true, silent = true })
-
+-- Exec current buffer if it's a shell script
+vim.keymap.set("n", "<leader>ee", "<cmd>if &filetype == 'sh' <bar> exec '!%'<bar>endif<CR>",
+               { noremap = true, silent = true })
 
 --print("lua/ggrl/remap.lua carregado com sucesso!")

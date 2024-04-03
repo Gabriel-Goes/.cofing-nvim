@@ -1,5 +1,23 @@
 -- print('Hello, from after/plugin/treesitter.lua')
 require'nvim-treesitter.configs'.setup {
+--     ensure_installed = {
+--         'bash',
+--         'c',
+--         'cpp',
+--         'css',
+--         'dockerfile',
+--         'go',
+--         'html',
+--         'javascript',
+--         'json',
+--         'lua',
+--         'python',
+--         'regex',
+--         'rust',
+--         'toml',
+--         'typescript',
+--         'yaml',
+--     },
     sync_install = true,
     playground = {
         enable = true,
@@ -25,5 +43,14 @@ require'nvim-treesitter.configs'.setup {
     },
     indent = {
       enable = true,
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = 'gnn',
+            node_incremental = 'grn',
+            scope_incremental = 'grc',
+            node_decremental = 'grm',
+        },
     },
 }
