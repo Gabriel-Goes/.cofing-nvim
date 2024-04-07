@@ -1,7 +1,6 @@
 -- Autor: Gabriel Góes Rocha de Lima
 -- after/plugin/set.lua
 -- Last Change: 2024-02-05 00:48
---
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.hidden = false
