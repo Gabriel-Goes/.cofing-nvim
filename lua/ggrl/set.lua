@@ -7,6 +7,7 @@ vim.opt.hidden = false
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.guicursor = ""
+vim.opt.guifont = 'Hermit:h12'
 vim.o.cursorline = true
 vim.opt.nu = true
 vim.opt.relativenumber = true
