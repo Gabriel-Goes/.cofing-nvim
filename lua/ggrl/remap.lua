@@ -10,13 +10,14 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Tabs and Buffers
 vim.keymap.set('n', "<A-w>", "<C-w>")
 vim.keymap.set('n', "<A-t>", vim.cmd.tabnew)
+vim.keymap.set('n', "<A-c>", vim.cmd.tabc)
 
 -- change buffers with Alt + j/k
 vim.keymap.set("n", "<A-k>", "<cmd>bn<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-j>", "<cmd>bp<CR>", { noremap = true, silent = true })
 
 -- Delete buffer
-vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>",
+vim.keymap.set("n", "<leader>d", "<cmd>bd<CR>",
                { noremap = true, silent = true })
 -- Save file
 vim.keymap.set("n", "<leader>ww", "<cmd>w<CR>",
@@ -36,7 +37,7 @@ vim.keymap.set("n", "<leader>tt", "<cmd>botright 15split term://$SHELL<CR>",
                { noremap = true, silent = true })
 
 -- Exec current buffer if it's a shell script
-vim.keymap.set("n", "<leader>ee", "<cmd>if &filetype == 'sh' <bar> exec '!%'<bar>endif<CR>",
+vim.keymap.set("n", "<leader>ee", "<cmd><bar> exec '!%'<bar><CR>",
                { noremap = true, silent = true })
 
 --print("lua/ggrl/remap.lua carregado com sucesso!")

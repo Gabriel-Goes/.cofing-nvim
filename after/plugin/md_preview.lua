@@ -70,15 +70,13 @@ vim.g.mkdp_combine_preview = 0
 -- Automatically refetch combined preview contents when changing Markdown buffers (only applies if combine_preview is enabled)
 vim.g.mkdp_combine_preview_auto_refresh = 1
 
-
-
 -- Mapping for Markdown Preview in Lua for Neovim
 
 -- Start Markdown Preview
 vim.api.nvim_set_keymap('n', '<C-s>', '<Plug>MarkdownPreview', {silent = true})
 
 -- Stop Markdown Preview
-vim.api.nvim_set_keymap('n', '<M-s>', '<Plug>MarkdownPreviewStop', {silent = true})
+vim.api.nvim_set_keymap('n', '<A-s>', '<Plug>MarkdownPreviewStop', {silent = true})
 
 -- Toggle Markdown Preview
 vim.api.nvim_set_keymap('n', '<C-p>', '<Plug>MarkdownPreviewToggle', {silent = true})
