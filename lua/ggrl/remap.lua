@@ -25,7 +25,8 @@ vim.keymap.set("n", "<leader>ww", "<cmd>w<CR>",
 -- remap para chmod +x
 vim.keymap.set("n", "<leader>cx", "<cmd>!chmod +x %<CR>",
                { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>pp', ':NvimTreeToggle<CR>')
+-- Explorer
+vim.keymap.set('n', '<leader>pp', ':Neotree<CR>')
 
 -- keymap to source current file
 vim.keymap.set("n", "<leader>cc", "<cmd>update<CR>:source %<CR>",

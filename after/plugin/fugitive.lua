@@ -23,7 +23,7 @@ local function GitCommit()
 end
 
 local function GitGraph()
-    vim.cmd("vertical Git log --graph --oneline --all --decorate --abbrev-commit")
+    vim.cmd("vertical Git log --all --oneline --graph --decorate")
 end
 
 local function GitPush()
