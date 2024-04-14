@@ -19,7 +19,7 @@ require('neoconf').setup({
 local lsp = require('lsp-zero')
 lsp.setup()
 -- On attach function
-local on_attach = function(client, bufnr)
+local on_attach = function(bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local opts = { noremap = true, silent = true }
     -- Mapeamento de teclas
@@ -94,19 +94,7 @@ end
 -- LSP CLIENTS
 -- print('Configurando LSP CLIENTS')
 -------------- Lua_lsp
-require'lspconfig'.lua_ls.setup{
-    on_attach = on_attach,
-    settings = {
-        filetypes = {'lua'},
-        Lua = {
-            diagnostics = {
-                enable = true,
-                disable = {"undefined-global"},
-                globals = {'vim'},
-            },
-        },
-    }
-}
+
 -------------- Pylsp
 local home_user = os.getenv('HOME')
 require'lspconfig'.pylsp.setup{
