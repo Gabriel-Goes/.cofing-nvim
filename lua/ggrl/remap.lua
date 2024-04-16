@@ -42,5 +42,4 @@ vim.keymap.set("n", "<leader>tt", "<cmd>botright 15split term://$SHELL<CR>",
 vim.keymap.set("n", "<leader>ee", "<cmd><bar> exec '!%'<bar><CR>",
                { noremap = true, silent = true })
 
-
 --print("lua/ggrl/remap.lua carregado com sucesso!")

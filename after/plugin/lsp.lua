@@ -13,52 +13,29 @@ require('mason-lspconfig').setup({
     auto_install = true,
 })
 
+-- Neoconf
+--require('neoconf').setup({
+--})
+
 -- LSP Zero
 local lsp_zero = require('lsp-zero')
 lsp_zero.setup()
 
 -- On attach function
-local on_attach = function(bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local opts = { noremap = true, silent = true }
+local on_attach = function(client, bufnr)
+    local buf_set_keymap = function(mode, lhs, rhs, opts)
+        opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
+        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+    end
     -- Mapeamento de teclas
-    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', {})
+    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', {})
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {})
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {})
+    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', {})
 end
 
 -- Configurações VIMdiagnostic
--- Enable floating window in normal mode and disable in insert mode
-vim.api.nvim_create_autocmd({"CursorHold",}, {
-    callback = function()
-        if vim.api.nvim_get_mode().mode == "n" then
-            vim.diagnostic.virtual_text = false
-            vim.diagnostic.open_float(nil, {
-                focusable = false,
-                close_events = {"BufLeave",
-                                "CursorMoved",
-                                "InsertEnter",
-                                "FocusLost"},
-                border = 'single',
-                source = 'always',
-                prefix = ' ',
-                scope = 'cursor',
-            },
-            vim.diagnostic.hint)
-        end
-
-    end,
-})
-
 vim.diagnostic.config({
     -- enable buffer diagnostics hover mouse
     virtual_text = false,
@@ -78,44 +55,47 @@ vim.diagnostic.config({
     }
 })
 
+-- Autocomando para janelas de diagnóstico flutuantes
+vim.api.nvim_create_autocmd({"CursorHold"}, {
+    callback = function()
+        if vim.api.nvim_get_mode().mode == "n" then
+            vim.diagnostic.open_float(nil, {
+                focusable = false,
+                close_events = {"BufLeave", "CursorMoved", "InsertEnter", "FocusLost"},
+                border = 'single',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            })
+        end
+    end,
+})
+
 -- Change diagnostic symbols in the sign column (gutter)
-local signs = { Error = "✘",
-                Warn = "󰀪",
-                Hint = "󰌶",
-                Info = "" }
-
+-- Definição de símbolos de diagnóstico
+local signs = { Error = "✘", Warn = "󰀪", Hint = "󰌶", Info = "" }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon,
-                           texthl = hl,
-                           numhl = "" })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, {
+        text = icon,
+        texthl = hl,
+        numhl = hl
+    })
 end
-
--- Neoconf
--- require('neoconf').setup({
--- 
--- })
 
 -- LSP CLIENTS
 local home_user = os.getenv('HOME')
+
 -------------- Lua_lsp
 require('lspconfig').lua_ls.setup{
-    cmd = {home_user .. "/.local/share/nvim/mason/bin/lua-language-server"},
     on_attach = on_attach,
     settings = {
         Lua = {
             diagnostics = {
-                globals = {"vim"},
+                globals = {'vim'},
             },
-            runtime = {
-                version = "LuaJIT",
-                path = vim.split(package.path, ';'),
-            },
-            workspace = {
-                library = {
-                    [home_user .. "/.local/share/nvim/mason/"] = true,
-                    [home_user .. "/.local/share/nvim/mason/lua/"] = true,
-                },
+            telemetry = {
+                enable = false,
             },
         },
     },
@@ -123,49 +103,8 @@ require('lspconfig').lua_ls.setup{
 
 -------------- Pylsp
 require'lspconfig'.pylsp.setup{
-    cmd = {home_user .. "/.local/share/nvim/mason/bin/pylsp"},
+    cmd = {vim.fn.stdpath('data') .. '/mason/bin/pylsp'},
     on_attach = on_attach,
-    settings = {
-        pylsp = {
-            plugins = {
-                pyflakes = {
-                    enabled = true,
-                },
-                jedi_completion = {
-                    enabled = true,
-                },
-                jedi_hover = {
-                    enabled = true,
-                },
-                jedi_references = {
-                    enabled = true,
-                },
-                jedi_signature_help = {
-                    enabled = true,
-                },
-                jedi_symbols = {
-                    enabled = true,
-                    all_scopes = true,
-                },
-                pyls_my = {
-                    enabled = true,
-                },
-                pylsp_black = {
-                    enabled = true,
-                    line_length = 88,
-                },
-                pycodestyle = {
-                    enabled = true,
-                    ignore = {'E501'},
-                },
-            },
-        },
-       diagnostics = {
-           enable = true,
-           disable = {"undefined-variable"},
-           globals = {"vim"},
-       },
-    }
 }
 -------------- LaTex
 require'lspconfig'.ltex.setup{
