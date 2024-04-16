@@ -3,6 +3,7 @@
 -- Last Change: 2024-02-03 20:46
 -- LSP Native
 -- print('Hello, from after/plugin/lsp.lua')
+
 --  Mason LSP
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -11,13 +12,11 @@ require('mason-lspconfig').setup({
     sync_install = true,
     auto_install = true,
 })
--- Neoconf
-require('neoconf').setup({
 
-})
 -- LSP Zero
-local lsp = require('lsp-zero')
-lsp.setup()
+local lsp_zero = require('lsp-zero')
+lsp_zero.setup()
+
 -- On attach function
 local on_attach = function(bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -80,10 +79,11 @@ vim.diagnostic.config({
 })
 
 -- Change diagnostic symbols in the sign column (gutter)
-local signs = { Error = "󰅚",
+local signs = { Error = "✘",
                 Warn = "󰀪",
                 Hint = "󰌶",
                 Info = "" }
+
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon,
@@ -91,12 +91,37 @@ for type, icon in pairs(signs) do
                            numhl = "" })
 end
 
+-- Neoconf
+-- require('neoconf').setup({
+-- 
+-- })
+
 -- LSP CLIENTS
--- print('Configurando LSP CLIENTS')
+local home_user = os.getenv('HOME')
 -------------- Lua_lsp
+require('lspconfig').lua_ls.setup{
+    cmd = {home_user .. "/.local/share/nvim/mason/bin/lua-language-server"},
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {"vim"},
+            },
+            runtime = {
+                version = "LuaJIT",
+                path = vim.split(package.path, ';'),
+            },
+            workspace = {
+                library = {
+                    [home_user .. "/.local/share/nvim/mason/"] = true,
+                    [home_user .. "/.local/share/nvim/mason/lua/"] = true,
+                },
+            },
+        },
+    },
+}
 
 -------------- Pylsp
-local home_user = os.getenv('HOME')
 require'lspconfig'.pylsp.setup{
     cmd = {home_user .. "/.local/share/nvim/mason/bin/pylsp"},
     on_attach = on_attach,

@@ -22,15 +22,16 @@ vim.keymap.set("n", "<leader>d", "<cmd>bd<CR>",
 -- Save file
 vim.keymap.set("n", "<leader>ww", "<cmd>w<CR>",
                { noremap = true, silent = true })
+
+-- keymap to source current file
+vim.keymap.set("n", "<leader>cc", "<cmd>update<CR>:source %<CR>",
+               { noremap = true, silent = true })
+
 -- remap para chmod +x
 vim.keymap.set("n", "<leader>cx", "<cmd>!chmod +x %<CR>",
                { noremap = true, silent = true })
 -- Explorer
 vim.keymap.set('n', '<leader>pp', ':Neotree<CR>')
-
--- keymap to source current file
-vim.keymap.set("n", "<leader>cc", "<cmd>update<CR>:source %<CR>",
-               { noremap = true, silent = true })
 
 -- Terminal
 -- Keymap to open :term in a new window bellow the current one
@@ -40,5 +41,6 @@ vim.keymap.set("n", "<leader>tt", "<cmd>botright 15split term://$SHELL<CR>",
 -- Exec current buffer if it's a shell script
 vim.keymap.set("n", "<leader>ee", "<cmd><bar> exec '!%'<bar><CR>",
                { noremap = true, silent = true })
+
 
 --print("lua/ggrl/remap.lua carregado com sucesso!")

@@ -74,11 +74,11 @@ end)
 
 ThemeManager:addTheme('gruvbox', function()
     vim.cmd("colorscheme gruvbox")
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     vim.api.nvim_set_hl(0, "CursorLine", { bg = "#3b3b3b" })
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ffcc66" })
-    vim.api.nvim_set_hl(0, "NormalNC", { bg = "#282828" })
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalNC", { bg = "#252525" })
 end)
 
 ThemeManager:addTheme('tokyonight', function()
@@ -110,5 +110,4 @@ end)
 
 
 -- Aplicando o tema
-ThemeManager:applyTheme('gruvbox')
---/home/ggrl/.local/share/nvim/lazy/nvim/lua/catppuccin/init.lua
+ThemeManager:applyTheme('gruvbox') --/home/ggrl/.local/share/nvim/lazy/nvim/lua/catppuccin/init.lua
