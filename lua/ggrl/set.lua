@@ -37,6 +37,13 @@ vim.opt.shell = 'bash'
 vim.opt.shellcmdflag = '-c'
 vim.opt.shellredir = '>%s 2>&1'
 vim.opt.shellpipe = '2>&1| tee'
+-- Python-Mode Configurations
+vim.g.pymode_lint = 0
+vim.g.pymode_rope = 0
+vim.g.pymode_folding = 1
+vim.g.pymode_format = 1
+vim.g.python3_host_prog = '~/.pyenv/versions/sismologia/bin/python3'
+
 -- Terminal configurations with relative numbers and numbers
 vim.opt.termguicolors = true
 vim.cmd([[autocmd TermOpen * setlocal winhighlight=Normal:NormalFloat]])
