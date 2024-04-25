@@ -110,4 +110,4 @@ end)
 
 
 -- Aplicando o tema
-ThemeManager:applyTheme('gruvbox') --/home/ggrl/.local/share/nvim/lazy/nvim/lua/catppuccin/init.lua
+--ThemeManager:applyTheme('gruvbox') --/home/ggrl/.local/share/nvim/lazy/nvim/lua/catppuccin/init.lua

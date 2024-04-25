@@ -253,6 +253,16 @@ local plugins = {
             nowait = true,
           },
           mappings = {
+            -- Execute tar -xvf on the current buffer file if its a .tar.gz
+            ['F5'] = function(state)
+              local node = state.tree:get_node()
+              if node then
+                local path = node.absolute_path
+                if path:match("%.tar%.gz$") then
+                  vim.cmd("silent !tar -xvf " .. path)
+                end
+              end
+            end,
             ["<space>"] = {
                 "toggle_node",
                 nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
